@@ -4,7 +4,6 @@ public class Heap
 	static int minnropecost(int len[],int n)
 	{
 		int totalcost=0;
-		int j=0;
 		PriorityQueue<Integer> q = new PriorityQueue<Integer>();
 		for(int i=0;i<n;i++)
 		{
