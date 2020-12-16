@@ -1,0 +1,27 @@
+import java.util.*;
+public class Heap 
+{
+	static int minnropecost(int len[],int n)
+	{
+		int totalcost=0;
+		int j=0;
+		PriorityQueue<Integer> q = new PriorityQueue<Integer>();
+		for(int i=0;i<n;i++)
+		{
+			q.add(len[i]);
+		}
+		while(q.size()>1)
+		{
+			int first = q.poll();
+			int second = q.poll();
+			totalcost+=first+second;
+			q.add(first+second);
+		}
+		return totalcost;
+	}
+	public static void main(String[] args)
+	{
+		int len[] = { 1,2, 3, 4, 5};
+		System.out.println(minnropecost(len,5));
+	}
+}
