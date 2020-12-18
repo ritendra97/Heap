@@ -1,0 +1,57 @@
+//sliding window concept
+//Sort an array of 0s, 1s and 2s.
+import java.util.*;
+public class Solution 
+{
+	static int removeduplicate(int arr[],int n,int k)
+	{
+		  PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>();
+		  HashMap<Integer,Integer> num = new HashMap<>();
+		  for(int i=0;i<n;i++)
+		  {
+			  if(num.containsKey(arr[i]))
+			  {
+				  int x= num.get(arr[i]);
+				  num.put(arr[i], x+1);
+			  }
+			  else
+			  {
+				  num.put(arr[i], 1);
+			  }
+		  }
+		  int ans1=0;
+		  for(Map.Entry<Integer, Integer> ans : num.entrySet())
+		  {
+			  if(ans.getValue()==1)
+			  {
+				  ++ans1; 
+			  }
+			  else
+			  {
+				  minHeap.add(ans.getValue());
+			  }
+		  }
+		  while(k!=0 || !minHeap.isEmpty())
+		  {
+			  Integer t = minHeap.poll();
+			  if(t==1)
+			  {
+				  ++ans1;
+			  }
+			  else
+			  {
+				  --k;
+				  --t;
+				  minHeap.add(t);
+			  }
+			  
+		  }
+		  return ans1;
+	}
+	public static void main(String[] args) 
+	{
+		int arr[] = {5, 7, 5, 5, 1, 2, 2};
+		int n = arr.length;
+		System.out.println(removeduplicate(arr,n,3));
+	}
+}
