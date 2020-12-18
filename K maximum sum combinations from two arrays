@@ -1,0 +1,28 @@
+// This is O(n2) time complexity u have to optimized it
+import java.util.*;
+public class Heap 
+{
+	static PriorityQueue<Integer> maxheap1= new PriorityQueue<>(Collections.reverseOrder());
+	static void KMaxCombinations(int A[], int B[],int N, int K)
+	{
+		for(int i=0;i<N;i++)
+		{
+			for(int j=0;j<N;j++)
+			{
+				maxheap1.add(A[i]+B[j]);
+			}
+		}
+		for(int i=0;i<K;i++)
+		{
+			System.out.println(maxheap1.remove());
+		}
+	}
+	public static void main(String[] args) 
+	{
+		 int A[] = { 4, 2, 5, 1 };
+	     int B[] = { 8, 0, 5, 3 };
+	     int N = A.length;
+	     int K=3;
+	     KMaxCombinations(A,B,N,K);
+	}
+}
