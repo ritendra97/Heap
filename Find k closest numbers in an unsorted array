@@ -1,0 +1,62 @@
+import java.util.*;
+import java.util.Comparator;
+class Pair
+{
+	Integer key;
+	Integer value;
+	Pair(Integer i,Integer j)
+	{
+		this.key=i;
+		this.value=j;
+	}
+	public Integer getvalue()
+	{
+		return value;
+	}
+	public Integer getkey()
+	{
+		return key;
+	}
+	public void setvalue(Integer value)
+	{
+		this.value=value;
+	}
+	public void setkey(Integer key)
+	{
+		this.key=key;
+	}
+}
+public class Heap 
+{
+	static void kclosest(int arr[],int n,int sum,int k)
+	{
+		PriorityQueue<Pair> maxheap = new PriorityQueue<>(new Comparator<Pair>() {
+			public int compare(Pair p1,Pair p2)
+			{
+				// Now this is maxheap if you will interchange p1 and p2 than it will become minheap.
+				return p2.getvalue().compareTo(p1.getvalue()); 
+			}
+		});
+		for(int i=0;i<n;i++)
+		{
+			maxheap.offer(new Pair(Math.abs(arr[i]-sum),arr[i]));
+			if(maxheap.size()>k)
+			{
+				maxheap.poll();
+			}
+		}
+		while(!maxheap.isEmpty())
+		{
+			System.out.println(maxheap.peek().getvalue() + " ");
+			maxheap.poll();
+		}
+	}
+	public static void main(String[] args) 
+	{
+		int arr[] = {10, 2, 14, 4, 7, 6};
+		int sum=5;
+		int k=3;
+		int n=arr.length;
+		kclosest(arr,n,sum,k);
+	}
+}
