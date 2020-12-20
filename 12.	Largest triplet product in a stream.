@@ -1,0 +1,33 @@
+import java.util.*;
+public class Heap 
+{
+	static void largestsubarray(int arr[],int n)
+	{
+		PriorityQueue<Integer> maxheap = new PriorityQueue<Integer>(Collections.reverseOrder());
+		for(int i=0;i<n;i++)
+		{
+			maxheap.add(arr[i]);
+			if(maxheap.size()<3)
+			{
+				System.out.println(-1);
+			}
+			else
+			{
+				int x = maxheap.poll();
+				int y = maxheap.poll();
+				int z = maxheap.poll();
+				int ans= x*y*z;
+				System.out.println(ans);
+				maxheap.add(x);
+				maxheap.add(y);
+				maxheap.add(z);
+			}
+		}
+	}
+	public static void main(String[] args) 
+	{
+		int arr[]= {1, 2, 3, 4, 5};
+		int n= arr.length;
+		largestsubarray(arr,n);
+	}
+}
