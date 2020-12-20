@@ -1,0 +1,32 @@
+import java.util.*;
+public class Heap 
+{
+	static int sum=0;
+	static int count=0;
+	static int sumBetweenTwoKth(int arr[],int k1, int k2)
+	{
+		PriorityQueue<Integer> minheap = new PriorityQueue<>();
+		for(int i=0;i<arr.length;i++)
+		{
+			minheap.add(arr[i]);
+		}
+		while(!minheap.isEmpty())
+		{
+			count++;
+			if(count>k1 )
+			{
+				if(count<k2)
+				   sum=sum+minheap.peek();
+			}
+			minheap.poll();
+		}
+		return sum;
+	}
+	public static void main(String[] args) 
+	{
+		int arr[] = {20, 8, 22, 4, 12, 10, 14};
+		int k1=3;
+		int k2=6;
+		System.out.println(sumBetweenTwoKth(arr,k1,k2));
+	}
+}
