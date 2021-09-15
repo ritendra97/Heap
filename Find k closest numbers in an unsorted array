@@ -1,5 +1,9 @@
 import java.util.*;
 import java.util.Comparator;
+
+Time Complexity - O(nlogn)
+Space Complexity - O(n)
+
 class Pair
 {
 	Integer key;
@@ -58,5 +62,63 @@ public class Heap
 		int k=3;
 		int n=arr.length;
 		kclosest(arr,n,sum,k);
+	}
+}
+
+Efficient Solutioin
+Time Complexity O(nlogk)
+Space Complexity O(n)
+
+import java.util.*;
+
+class pair {
+
+	int x;
+	int y;
+
+	public pair(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+}
+
+public class Practice {
+
+	public static void kclosest(int arr[], int n, int sum, int k) {
+		
+		PriorityQueue<pair> pq = new PriorityQueue<pair>(new Comparator<pair>() {
+
+			@Override
+			public int compare(pair o1, pair o2) {
+				return o2.x - o1.x;
+			}
+
+		});
+		
+		for(int i=0;i<k;i++) {
+			pq.add(new pair(Math.abs(sum-arr[i]),arr[i]));
+		}
+		
+		for(int i=k;i<n;i++) {
+			int diff = Math.abs(sum-arr[i]);
+			
+			if(diff>pq.peek().x)
+				continue;
+			
+			pq.poll();
+			pq.add(new pair(Math.abs(sum-arr[i]),arr[i]));
+		}
+		
+		while(!pq.isEmpty()){
+			System.out.println(pq.poll().y);
+		}
+	}
+	public static void main(String[] args) {
+		int arr[] = { -10, -50, 20, 17, 80 };
+		int sum = 20;
+		int k = 2;
+		int n = arr.length;
+		kclosest(arr, n, sum, k);
 	}
 }
