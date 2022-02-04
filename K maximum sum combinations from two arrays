@@ -26,3 +26,66 @@ public class Heap
 	     KMaxCombinations(A,B,N,K);
 	}
 }
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+class greedyNode{
+    int sum;
+    int l;
+    int r;
+
+    public greedyNode(int sum1, int l, int r) {
+        this.sum = sum1;
+        this.l = l;
+        this.r = r;
+    }
+}
+
+public class BinaryTree{
+
+    public static void maxPair(int arr1[], int arr2[], int k){
+
+        PriorityQueue<greedyNode> pq = new PriorityQueue<>(new Comparator<greedyNode>() {
+
+			@Override
+			public int compare(greedyNode o1, greedyNode o2) {
+				
+				return o2.sum-o1.sum;
+			}
+        	
+        });
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        int l = arr1.length-1;
+        int r = arr2.length-1;
+
+        pq.add( new greedyNode(arr1[l]+arr2[r],l,r) );
+
+        for(int i = 0;i<k;i++){
+
+            greedyNode node = pq.poll();
+            System.out.println(node.sum);
+
+            l = node.l-1;
+            r = node.r;
+            if(l>=0 && node.r>=0){
+                pq.add(new greedyNode(arr1[l]+arr2[r],l,r));
+            }
+
+            l = node.l;
+            r = node.r-1;
+            if(node.l>=0 && r>=0){
+                pq.add(new greedyNode(arr1[l]+arr2[r],l,r));
+            }
+        }
+    }
+    public static void main(String[] args){
+        int arr1[] = {3,2};
+        int arr2[] = {1,4};
+        int k = 2;
+
+        maxPair(arr1,arr2,k);
+    }
+}
