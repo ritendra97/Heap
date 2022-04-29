@@ -1,3 +1,74 @@
+import java.util.Collections;
+import java.util.PriorityQueue;
+
+/*
+    Here we will have two priority queue left and right priority queue,
+    -> left priority queue will be max priority queue
+    -> right priority queue will be min priority queue
+
+    point-2
+    The value that you are trying to put if that value is grater than the right priority Queue than u a going to put that value there
+    By default u will put the value in left priority queue
+
+    point-3
+    If you want to get element the priority queue having max size medium will be there
+    Otherwise left size element will be there by default.
+
+    point-3
+    Size difference can not be more than
+
+ */
+public class Main4 {
+
+    PriorityQueue<Integer> max;
+    PriorityQueue<Integer> min;
+
+    Main4(){
+        max = new PriorityQueue<>();
+        min = new PriorityQueue<>(Collections.reverseOrder());
+    }
+
+    public void add(int val){
+        if(val>min.peek()){
+            min.add(val);
+        }else{
+            max.add(val);
+        }
+
+        if(min.size()-max.size()==2){
+            max.add(min.remove());
+        }else if(max.size()-min.size()==2){
+            min.add(max.remove());
+        }
+    }
+
+    public int remove(){
+        if(max.size()+min.size()==0) return -1;
+        else if(max.size()>=min.size()){
+            return max.remove();
+        }else{
+            return min.remove();
+        }
+    }
+
+    public int peek(){
+        if(max.size()+min.size()==0) return -1;
+        else if(max.size()>=min.size()){
+            return max.peek();
+        }else{
+            return min.peek();
+        }
+    }
+
+    public int size(){
+        return min.size()+max.size();
+    }
+    public static void main(String[] args){
+        
+    }
+}
+
+
 import java.util.*;
 public class Heap 
 {
